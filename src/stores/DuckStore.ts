@@ -33,7 +33,7 @@ export class DuckStore {
     this.animationFrame = val;
   }
 
-  // Start a flight: place at x=0, y=startY and animate to x=120 over durationMs
+  // Start a flight: place at x=0, y=startY and animate to x=110 over durationMs
   // onFinish is called when the duck fully exits the screen (natural end)
   startFlight(startY: number, durationMs: number, onFinish?: () => void) {
     this.stopFlight();
@@ -49,7 +49,7 @@ export class DuckStore {
       this.setAnimationFrame(this.animationFrame === 0 ? 1 : 0);
     }, 300);
 
-    const EXIT_PERCENT = 120; // animate to 120% so duck fully leaves viewport
+    const EXIT_PERCENT = 110; // animate to 110% so duck fully leaves viewport
     const step = (timestamp: number) => {
       if (this._startTime == null) this._startTime = timestamp;
       const elapsed = timestamp - this._startTime;
