@@ -2,7 +2,7 @@
 
 ## Tech Stack
 
-- React 19 + Vite
+- React 19 + Vite + TypeScript
 - MobX 6 + mobx-react-lite
 - Howler.js for audio
 - HTML + CSS for duck animation (no canvas)
