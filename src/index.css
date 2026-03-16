@@ -17,17 +17,6 @@ body {
   overflow: hidden;
 }
 
-.hud {
-  position: absolute;
-  top: 12px;
-  left: 12px;
-  background: rgba(0, 0, 0, 0.5);
-  color: white;
-  padding: 6px 10px;
-  border-radius: 6px;
-  font-weight: bold;
-  z-index: 20;
-}
 
 .play-area {
   position: relative;
