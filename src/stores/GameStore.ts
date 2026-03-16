@@ -17,6 +17,10 @@ class GameStore {
   endRound() {
     this.isRoundActive = false;
   }
+
+  recordHit() {
+    this.totalHits += 1;
+  }
 }
 
 export const gameStore = new GameStore();

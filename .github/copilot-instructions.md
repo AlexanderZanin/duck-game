@@ -20,7 +20,7 @@ src/
   stores/         # MobX store classes
   services/       # Non-MobX singletons (e.g. SoundService)
 server/
-  index.js        # Node.js + socket.io server
+  index.ts        # Node.js + socket.io server
 ```
 
 ---
@@ -80,8 +80,8 @@ import { duckStore } from '../stores/DuckStore';
 - Components call hooks, not stores
 - The primary hook is `useGame` — it is the single entry point for all game interactions
 
-```js
-// useGame.js exposes:
+```ts
+// useGame.ts exposes:
 // { totalRounds, totalHits, isRoundActive, duck, shootAt, startRound }
 ```
 
@@ -110,7 +110,7 @@ import { duckStore } from '../stores/DuckStore';
 
 ## Sound Rules
 
-- All audio is handled by `SoundService` in `src/services/SoundService.js`
+- All audio is handled by `SoundService` in `src/services/SoundService.ts`
 - Uses Howler.js — no native `Audio` API
 - `SoundService` is a plain class singleton (not MobX)
 - Methods: `playQuack()` (loops), `stopQuack()`, `playShot()` (plays once)
@@ -153,10 +153,10 @@ export const soundService = new SoundService();
 
 ## Socket.io Rules
 
-- Server lives in `server/index.js`, runs on port 3001
+- Server lives in `server/index.ts`, runs on port 3001
 - Server owns round launch timing — it emits `round:start` to all clients
 - `round:start` payload: `{ startY: number, durationMs: number, trajectoryVariant: number }`
-- Frontend listens via a `SocketService` in `src/services/SocketService.js`
+- Frontend listens via a `SocketService` in `src/services/SocketService.ts`
 - On `round:start`, `SocketService` calls `gameStore.startRound()` with the payload
 - Do not put socket logic inside React components or hooks
 

@@ -1,0 +1,23 @@
+.duck {
+  background-image: url("/src/assets/duck_sprite.svg");
+  background-repeat: no-repeat;
+  width: 86px;
+  height: 64px;
+  cursor: crosshair;
+  will-change: left, top, background-position;
+}
+
+.duck--frame0 {
+  background-position: 0px 0px;
+}
+
+.duck--frame1 {
+  background-position: -86px 0px;
+}
+
+.duck--hit {
+  background-position: -172px 0px !important;
+  cursor: default;
+  transition: opacity 3s linear;
+  opacity: 0;
+}
