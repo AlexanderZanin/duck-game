@@ -6,8 +6,6 @@ import { soundService } from "../services/SoundService";
 const START_Y_MIN = 5; // percent
 const START_Y_MAX = 75; // percent
 
-const FLIGHT_DURATION_MIN_SEC = 2;
-const FLIGHT_DURATION_MAX_SEC = 10;
 const MS_PER_SEC = 1000;
 
 const LAUNCH_INTERVAL_MS = 10000;
@@ -19,13 +17,7 @@ function randomStartY() {
   return Math.floor(Math.random() * (range + 1)) + START_Y_MIN;
 }
 
-function randomFlightDuration() {
-  const secs =
-    Math.floor(
-      Math.random() * (FLIGHT_DURATION_MAX_SEC - FLIGHT_DURATION_MIN_SEC + 1),
-    ) + FLIGHT_DURATION_MIN_SEC;
-  return secs * MS_PER_SEC;
-}
+const DEFAULT_FLIGHT_DURATION_SEC = 5 * MS_PER_SEC;
 
 export function useGame() {
   const launchRound = useCallback(() => {
@@ -33,7 +25,9 @@ export function useGame() {
     gameStore.startRound();
     soundService.playQuack();
 
-    const durationMs = randomFlightDuration();
+    const durationMs =
+      gameStore.roundConfig?.durationMs ?? DEFAULT_FLIGHT_DURATION_SEC;
+
     duckStore.startFlight(startY, durationMs, () => {
       soundService.stopQuack();
       gameStore.endRound();
@@ -56,7 +50,10 @@ export function useGame() {
 
   useEffect(() => {
     launchRound();
-    const id = setInterval(launchRound, LAUNCH_INTERVAL_MS);
+    const id = setInterval(
+      launchRound,
+      gameStore.roundConfig?.nextRoundInMs ?? LAUNCH_INTERVAL_MS,
+    );
     return () => clearInterval(id);
   }, [launchRound]);
 
