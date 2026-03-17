@@ -20,7 +20,7 @@ export const Duck: React.FC<Props> = ({
     left: `${x}%`,
     top: `${y}%`,
     position: "absolute",
-    width: 82,
+    width: 86,
     height: 64,
     transform: "translate(-50%, -50%)",
   };
