@@ -76,12 +76,7 @@ import { duckStore } from '../stores/DuckStore';
 - All domain logic is accessed via hooks in `src/hooks/`
 - Hooks import store singletons and services, compose them, and expose a clean API to components
 - Components call hooks, not stores
-- The primary hook is `useGame` — it is the single entry point for all game interactions
-
-```ts
-// useGame.ts exposes:
-// { totalRounds, totalHits, isRoundActive, duck, shootAt, startRound }
-```
+- The primary hooks are `useGame` and `useGameInit` — they are the single entry points for all game interactions
 
 ---
 

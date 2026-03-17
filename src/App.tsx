@@ -1,11 +1,13 @@
 import React from "react";
 import { observer } from "mobx-react-lite";
-import { useGame } from "./hooks/useGame";
+import { useGame, useGameInit } from "./hooks/";
 import { PlayArea, Hud, Loader } from "./components";
 
 import "./index.css";
 
 const App: React.FC = observer(() => {
+  useGameInit();
+
   const { gameStore } = useGame();
 
   return (
