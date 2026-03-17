@@ -1,9 +1,7 @@
 import React from "react";
 import { observer } from "mobx-react-lite";
 import { useGame } from "./hooks/useGame";
-import { PlayArea } from "./components/PlayArea";
-import { Hud } from "./components/Hud";
-import { Loader } from "./components/Loader";
+import { PlayArea, Hud, Loader } from "./components";
 
 import "./index.css";
 
