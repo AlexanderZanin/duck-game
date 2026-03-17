@@ -10,21 +10,16 @@ const MAX_ROUND_DELAY_S = 30;
 const MIN_FLIGHT_DURATION_S = 2;
 const MAX_FLIGHT_DURATION_S = 3;
 
-function randomBetweenMs(minSeconds: number, maxSeconds: number): number {
-  return (
-    (Math.floor(Math.random() * (maxSeconds - minSeconds + 1)) + minSeconds) *
-    1000
-  );
-}
+const randomBetweenMs = (minSeconds: number, maxSeconds: number): number =>
+  (Math.floor(Math.random() * (maxSeconds - minSeconds + 1)) + minSeconds) *
+  1000;
 
-function buildRoundPayload() {
-  return {
-    flightDurationMs: randomBetweenMs(
-      MIN_FLIGHT_DURATION_S,
-      MAX_FLIGHT_DURATION_S,
-    ),
-  };
-}
+const buildRoundPayload = () => ({
+  flightDurationMs: randomBetweenMs(
+    MIN_FLIGHT_DURATION_S,
+    MAX_FLIGHT_DURATION_S,
+  ),
+});
 
 const httpServer = createServer();
 const io = new Server(httpServer, {
@@ -47,7 +42,6 @@ function scheduleNextRound() {
     startsInMs: delayMs,
     payload: nextRoundPayload,
   });
-
 
   setTimeout(() => {
     console.log("Emitting round:start", nextRoundPayload);
