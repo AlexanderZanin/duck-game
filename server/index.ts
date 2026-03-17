@@ -4,12 +4,10 @@ import { Server } from "socket.io";
 const PORT = 3001;
 const CORS_ORIGIN = "http://localhost:5173";
 
-function randomBetween(min: number, max: number) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-function randomDurationMs() {
-  return randomBetween(2, 3) * 1000;
+function randomBetween(minSeconds: number, maxSeconds: number) {
+  const secs =
+    Math.floor(Math.random() * (maxSeconds - minSeconds + 1)) + minSeconds;
+  return secs * 1000;
 }
 
 const httpServer = createServer();
@@ -28,18 +26,17 @@ io.on("connection", (socket) => {
 httpServer.listen(PORT, () => {
   console.log(`Socket.io server listening on port ${PORT}`);
 
-  // Start the timed loop
   (function scheduleNext() {
-    const delay = randomBetween(5000, 7000);
-    console.log(`Next round in ${delay}ms`);
+    const delayMs = randomBetween(10, 30);
+    console.log(`Next round in ${delayMs}ms`);
     setTimeout(() => {
       const payload = {
-        flightDuration: randomDurationMs(),
-        nextRoundIn: delay,
+        flightDuration: randomBetween(2, 3),
+        nextRoundIn: delayMs,
       };
       console.log("emitting round:start", payload);
       io.emit("round:start", payload);
       scheduleNext();
-    }, delay);
+    }, delayMs);
   })();
 });

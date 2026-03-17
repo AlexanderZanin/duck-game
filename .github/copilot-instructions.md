@@ -155,7 +155,7 @@ export const soundService = new SoundService();
 
 - Server lives in `server/index.ts`, runs on port 3001
 - Server owns round launch timing — it emits `round:start` to all clients
-- `round:start` payload: `{ durationMs: number, nextRoundInMs: number }`
+- `round:start` payload: `{ flightDuration: number, nextRoundIn: number }`
 - Frontend listens via a `SocketService` in `src/services/SocketService.ts`
 - On `round:start`, `SocketService` calls `gameStore.startRound()` with the payload
 - Do not put socket logic inside React components or hooks
