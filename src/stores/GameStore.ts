@@ -1,12 +1,12 @@
 import { makeAutoObservable } from "mobx";
-import type { RoundConfig } from "../types";
+import type { RoundConfig, Game } from "../types";
 
-class GameStore {
+class GameStore implements Game {
   totalRounds = 0;
   totalHits = 0;
+  nextRoundIn = 0;
   roundConfig?: RoundConfig = undefined;
   isConnected = false;
-  nextRoundIn = 0;
 
   constructor() {
     makeAutoObservable(this);

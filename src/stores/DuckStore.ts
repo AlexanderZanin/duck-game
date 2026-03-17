@@ -1,11 +1,12 @@
 import { makeAutoObservable } from "mobx";
+import type { Duck } from "../types";
 
-export class DuckStore {
+export class DuckStore implements Duck {
   x = -100;
   y = 0;
   isHit = false;
-  animationFrame: 0 | 1 = 0;
   isActive = false;
+  animationFrame: 0 | 1 = 0;
 
   constructor() {
     makeAutoObservable(this);
