@@ -8,7 +8,7 @@ const MIN_ROUND_DELAY_S = 10;
 const MAX_ROUND_DELAY_S = 30;
 
 const MIN_FLIGHT_DURATION_S = 2;
-const MAX_FLIGHT_DURATION_S = 3;
+const MAX_FLIGHT_DURATION_S = 8;
 
 const randomBetweenMs = (minSeconds: number, maxSeconds: number): number =>
   (Math.floor(Math.random() * (maxSeconds - minSeconds + 1)) + minSeconds) *
