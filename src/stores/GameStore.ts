@@ -6,6 +6,9 @@ class GameStore {
   totalHits = 0;
   isRoundActive = false;
   roundConfig?: RoundConfig = undefined;
+  get isConnected() {
+    return this.roundConfig !== undefined;
+  }
 
   constructor() {
     makeAutoObservable(this);
