@@ -2,10 +2,19 @@
   position: absolute;
   top: 12px;
   left: 12px;
-  background: rgba(0, 0, 0, 0.5);
+  right: 12px;
   color: white;
-  padding: 6px 10px;
-  border-radius: 6px;
+
   font-weight: bold;
   z-index: 20;
+  display: flex;
+  justify-content: space-between;
+}
+
+.hud__info {
+  border-radius: 6px;
+  padding: 6px 10px;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  gap: 12px;
 }

@@ -5,10 +5,8 @@ class GameStore {
   totalRounds = 0;
   totalHits = 0;
   roundConfig?: RoundConfig = undefined;
-
-  get isConnected() {
-    return this.roundConfig !== undefined;
-  }
+  isConnected = false;
+  nextRoundIn = 0;
 
   constructor() {
     makeAutoObservable(this);
@@ -24,6 +22,14 @@ class GameStore {
 
   recordHit() {
     this.totalHits += 1;
+  }
+
+  setIsConnected(val: boolean) {
+    this.isConnected = val;
+  }
+
+  setNextRoundIn(val: number) {
+    this.nextRoundIn = val;
   }
 }
 

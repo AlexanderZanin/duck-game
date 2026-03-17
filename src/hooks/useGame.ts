@@ -10,8 +10,6 @@ const START_Y_MAX = 95; // percent
 
 const MS_PER_SEC = 1000;
 
-const LAUNCH_INTERVAL_MS = 10000;
-
 const DUCK_DISAPPEAR_AFTER_HIT_MS = 3000;
 
 function randomStartY() {
@@ -22,24 +20,6 @@ function randomStartY() {
 const DEFAULT_FLIGHT_DURATION_SEC = 5 * MS_PER_SEC;
 
 export function useGame() {
-  const launchRound = useCallback(() => {
-    console.log("Launching round");
-    const startY = randomStartY();
-    const durationMs =
-      gameStore.roundConfig?.flightDuration ?? DEFAULT_FLIGHT_DURATION_SEC;
-
-    gameStore.startRound();
-    soundService.playQuack();
-
-    animationService.start({
-      startY,
-      durationMs,
-      onFinish: () => {
-        soundService.stopQuack();
-      },
-    });
-  }, []);
-
   const hitDuck = useCallback(() => {
     if (duckStore.isHit) return;
     duckStore.hit();
@@ -58,17 +38,26 @@ export function useGame() {
     const disposer = reaction(
       () => gameStore.roundConfig,
       (roundConfig) => {
-        const id = setTimeout(
-          launchRound,
-          roundConfig?.nextRoundIn ?? LAUNCH_INTERVAL_MS,
-        );
-        return () => clearTimeout(id);
+        const startY = randomStartY();
+        const durationMs =
+          roundConfig?.flightDurationMs ?? DEFAULT_FLIGHT_DURATION_SEC;
+
+        gameStore.startRound();
+        soundService.playQuack();
+
+        animationService.start({
+          startY,
+          durationMs,
+          onFinish: () => {
+            soundService.stopQuack();
+          },
+        });
       },
     );
     return () => {
       disposer();
     };
-  }, [launchRound]);
+  }, []);
 
   return {
     gameStore,

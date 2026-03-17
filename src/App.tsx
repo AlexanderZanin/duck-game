@@ -17,6 +17,7 @@ const App: React.FC = observer(() => {
           <Hud
             totalHits={gameStore.totalHits}
             totalRounds={gameStore.totalRounds}
+            nextRoundIn={gameStore.nextRoundIn}
           />
           <div className="play-area">
             <Duck

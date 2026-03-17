@@ -15,15 +15,17 @@ class SocketService {
 
     this.socket.on("connect", () => {
       console.log("connected to socket server", this.socket?.id);
+      gameStore.setIsConnected(true);
+    });
+
+    this.socket.on("round:scheduled", (payload: { startsInMs: number; payload: RoundConfig }) => {
+      console.log("received round:scheduled", payload);
+      gameStore.setNextRoundIn(payload.startsInMs);
     });
 
     this.socket.on("round:start", (payload: RoundConfig) => {
       console.log("received round:start", payload);
-      try {
-        gameStore.setRoundConfig(payload);
-      } catch (e) {
-        console.error("gameStore.startRound failed", e);
-      }
+      gameStore.setRoundConfig(payload);
     });
 
     this.socket.on("disconnect", (reason) => {
