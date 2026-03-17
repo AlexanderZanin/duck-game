@@ -33,12 +33,11 @@ server/
 - Computed values must use `get` getters — do not derive state inside components
 - Do not use decorators (`@observable`, `@action`) — use `makeAutoObservable` only
 
-```js
+```ts
 // CORRECT
 class GameStore {
   totalRounds = 0;
   totalHits = 0;
-  isRoundActive = false;
 
   constructor() {
     makeAutoObservable(this);
@@ -46,7 +45,6 @@ class GameStore {
 
   startRound() {
     this.totalRounds += 1;
-    this.isRoundActive = true;
   }
 }
 

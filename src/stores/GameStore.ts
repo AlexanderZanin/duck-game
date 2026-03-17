@@ -4,8 +4,8 @@ import type { RoundConfig } from "../types";
 class GameStore {
   totalRounds = 0;
   totalHits = 0;
-  isRoundActive = false;
   roundConfig?: RoundConfig = undefined;
+
   get isConnected() {
     return this.roundConfig !== undefined;
   }
@@ -16,15 +16,10 @@ class GameStore {
 
   startRound() {
     this.totalRounds += 1;
-    this.isRoundActive = true;
   }
 
   setRoundConfig(config: RoundConfig) {
     this.roundConfig = config;
-  }
-
-  endRound() {
-    this.isRoundActive = false;
   }
 
   recordHit() {

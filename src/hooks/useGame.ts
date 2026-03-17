@@ -6,7 +6,7 @@ import { soundService } from "../services/SoundService";
 import { animationService } from "../services/AnimationService";
 
 const START_Y_MIN = 5; // percent
-const START_Y_MAX = 75; // percent
+const START_Y_MAX = 95; // percent
 
 const MS_PER_SEC = 1000;
 
@@ -36,14 +36,12 @@ export function useGame() {
       durationMs,
       onFinish: () => {
         soundService.stopQuack();
-        gameStore.endRound();
       },
     });
   }, []);
 
   const hitDuck = useCallback(() => {
     if (duckStore.isHit) return;
-    // mark hit in store, stop animation
     duckStore.hit();
     animationService.stop();
     soundService.stopQuack();
@@ -53,7 +51,6 @@ export function useGame() {
     setTimeout(() => {
       duckStore.setX(-100);
       duckStore.setIsHit(false);
-      gameStore.endRound();
     }, DUCK_DISAPPEAR_AFTER_HIT_MS);
   }, []);
 

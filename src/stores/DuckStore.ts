@@ -8,7 +8,7 @@ export class DuckStore {
   isActive = false;
 
   constructor() {
-    makeAutoObservable(this, {}, { autoBind: true });
+    makeAutoObservable(this);
   }
 
   setPosition(x: number, y: number) {
