@@ -34,8 +34,8 @@ httpServer.listen(PORT, () => {
     console.log(`Next round in ${delay}ms`);
     setTimeout(() => {
       const payload = {
-        durationMs: randomDurationMs(),
-        nextRoundInMs: delay,
+        flightDuration: randomDurationMs(),
+        nextRoundIn: delay,
       };
       console.log("emitting round:start", payload);
       io.emit("round:start", payload);

@@ -26,7 +26,7 @@ export function useGame() {
     console.log("Launching round");
     const startY = randomStartY();
     const durationMs =
-      gameStore.roundConfig?.durationMs ?? DEFAULT_FLIGHT_DURATION_SEC;
+      gameStore.roundConfig?.flightDuration ?? DEFAULT_FLIGHT_DURATION_SEC;
 
     gameStore.startRound();
     soundService.playQuack();
@@ -60,7 +60,7 @@ export function useGame() {
       (roundConfig) => {
         const id = setTimeout(
           launchRound,
-          roundConfig?.nextRoundInMs ?? LAUNCH_INTERVAL_MS,
+          roundConfig?.nextRoundIn ?? LAUNCH_INTERVAL_MS,
         );
         return () => clearTimeout(id);
       },

@@ -1,4 +1,4 @@
 export type RoundConfig = {
-  durationMs: number;
-  nextRoundInMs: number;
+  flightDuration: number;
+  nextRoundIn: number;
 };
