@@ -8,7 +8,7 @@ import "./index.css";
 const App: React.FC = observer(() => {
   useGameInit();
 
-  const { gameStore } = useGame();
+  const { gameStore, duckStore } = useGame();
 
   return (
     <div className="game-root">
@@ -18,6 +18,7 @@ const App: React.FC = observer(() => {
             totalHits={gameStore.totalHits}
             totalRounds={gameStore.totalRounds}
             nextRoundIn={gameStore.nextRoundIn}
+            isActive={duckStore.isActive}
           />
           <PlayArea />
         </>
