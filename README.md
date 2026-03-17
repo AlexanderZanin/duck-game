@@ -1,4 +1,4 @@
-# Duck Hunt — Quick Start
+# Duck Hunt - Quick Start
 
 Small Duck Hunt-style game: a Socket.IO server emits round-start events and the React + TypeScript frontend animates a duck sprite, plays audio, and accepts click-to-shoot input. State is managed with MobX and audio is handled with Howler.js.
 
