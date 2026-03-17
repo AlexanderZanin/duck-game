@@ -89,13 +89,15 @@ import { duckStore } from '../stores/DuckStore';
 
 ## Animation Rules
 
-- Duck position (`x`, `y`) is stored as percentage values (0–100) in DuckStore
-- Position is updated via `requestAnimationFrame` inside a MobX action
-- CSS handles sprite frame switching via `background-position` — not JS animation libraries
-- The duck element is absolutely positioned inside a full-viewport relative container
-- Wing flapping: toggle between frame 0 and frame 1 every 300ms using a MobX observable `animationFrame`
-- Hit state: set `background-position` to frame 3, stop flapping animation via a CSS class `duck--hit`
-- `steps(1)` timing is used in CSS transitions to snap between frames (no interpolation)
+- DuckStore owns position (x, y as viewport percentages), isHit, isActive
+- DuckStore does NOT contain requestAnimationFrame, timers, or DOM logic
+- AnimationService (src/services/AnimationService.ts) owns the RAF loop
+- AnimationService reads from duckStore and calls duckStore.setPosition(x, y) each frame
+- AnimationService starts via start(payload) and stops automatically on hit or flight completion
+- Wing flap frame toggling (animationFrame 0/1 every 300ms) lives in AnimationService,
+  updated via duckStore.setAnimationFrame(n)
+- CSS handles visual frame switching via background-position — no JS animation libraries
+- Components are purely reactive — they observe store state and render, nothing more
 
 ### Sprite Layout
 
