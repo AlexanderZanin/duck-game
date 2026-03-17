@@ -19,3 +19,9 @@ Start both frontend and backend concurrently:
 ```bash
 npm run dev:all
 ```
+
+Wait until everything is up and running and open in the browser:
+
+```
+http://localhost:5173/
+```
